@@ -23,7 +23,7 @@ export default function Greatings() {
   }, []);
   return (
     <>
-      <h1 className="text-4xl font-bold">{greeting}</h1>
+      <h1 className="text-3xl font-bold">{greeting}</h1>
       <h3 className="text-xl text-muted-foreground">
         What's your plan for today?
       </h3>

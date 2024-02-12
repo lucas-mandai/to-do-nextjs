@@ -9,6 +9,7 @@ import { ClipboardList } from 'lucide-react';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { useState } from 'react';
+import FilterStatus from '../filterStatus';
 
 export default function Task() {
   const { tasks, filterTasks, filteredTasks } = useTask();
@@ -33,7 +34,7 @@ export default function Task() {
           className="max-w-xs"
         />
         <Button variant={'outline'}>Priority</Button>
-        <Button variant={'outline'}>Completed</Button>
+        <FilterStatus />
       </div>
 
       <div className="flex w-full items-center justify-between">
