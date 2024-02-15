@@ -1,4 +1,5 @@
 import { ITask } from '@/app/page';
+import { Priority } from '@/components/filterPriority';
 import { Status } from '@/components/filterStatus';
 
 import { ReactNode, createContext, useEffect, useState } from 'react';
@@ -16,11 +17,14 @@ interface TaskContextType {
   deleteTask: (id: string) => void;
   addTask: (task: ITask) => void;
   toogleIsCompleted: (id: string) => void;
-  filterTasks: (input: string) => void;
   filteredTasks: TaskItem[];
   filterStatus: (status: string) => void;
   selectedStatus: Status | null;
   onSetSelectedStatus: (value: Status | null) => void;
+  selectedPriority: Priority[];
+  onSelectedPriority: (vPriority: Priority, vIsSelect: boolean) => void;
+  filterInput: string;
+  onSetFilterInput: (value: string) => void;
 }
 
 export const TaskContext = createContext({} as TaskContextType);
@@ -32,11 +36,13 @@ export default function TaskContextProvider({
   const [filteredTasks, setFilteredTasks] = useState<TaskItem[]>(tasks);
 
   const [selectedStatus, setSelectedStatus] = useState<Status | null>(null);
+  const [selectedPriority, setSelectedPriority] = useState<Priority[]>([]);
+  const [filterInput, setFilterInput] = useState('');
 
   useEffect(() => {
-    const f = filter(selectedStatus);
+    const f = filter();
     setFilteredTasks(f);
-  }, [tasks, selectedStatus]);
+  }, [tasks, selectedStatus, selectedPriority, filterInput]);
 
   /* Quando alguma task for alterada eu preciso:
       >Verificar os filtros e em seguinda setar filteredTasks
@@ -82,36 +88,71 @@ export default function TaskContextProvider({
     setTasks(newTasks);
   }
 
-  function filterTasks(input: string) {
-    const filtered = tasks.filter((i) =>
-      i.description.toLowerCase().includes(input.toLowerCase()),
+  function filterTasks(task: TaskItem[]) {
+    const filtered = task.filter((i) =>
+      i.description.toLowerCase().includes(filterInput.toLowerCase()),
     );
 
-    setFilteredTasks(filtered);
+    return filtered;
   }
 
-  function filterStatus(status: string | null) {
+  function filterStatus() {
     const filteredStatus = tasks.filter((t) => {
-      if (status === 'done') {
-        return t.isCompleted;
-      } else if (status === 'pending') {
-        return !t.isCompleted;
-      } else {
-        return true;
+      if (selectedStatus !== null) {
+        if (selectedStatus.value === 'done') {
+          return t.isCompleted;
+        } else if (selectedStatus.value === 'pending') {
+          return !t.isCompleted;
+        }
       }
+      return true;
     });
 
     return filteredStatus;
+  }
+
+  function filterPriorities(task: TaskItem[]) {
+    let matchingPriority = [];
+
+    if (selectedPriority?.length === 0) {
+      return task;
+    } else {
+      matchingPriority = task.filter((task) => {
+        return selectedPriority?.some(
+          (priority) => priority.value === task.priority,
+        );
+      });
+    }
+
+    return matchingPriority;
+  }
+
+  function onSetFilterInput(e: string) {
+    setFilterInput(e);
   }
 
   function onSetSelectedStatus(value: Status | null) {
     setSelectedStatus(value);
   }
 
-  function filter(status: Status | null) {
-    const filtered = filterStatus(status?.value ?? '');
+  function onSelectedPriority(opt: Priority, isSelect: boolean) {
+    if (opt !== null) {
+      if (isSelect) {
+        setSelectedPriority(
+          (prev) => prev?.filter((item) => item.value !== opt.value) ?? [],
+        );
+      } else {
+        setSelectedPriority((prev) => [...(prev ?? []), opt]);
+      }
+    }
+  }
 
-    return filtered;
+  function filter() {
+    const filteredS = filterStatus();
+    const filteredP = filterPriorities(filteredS);
+    const filterI = filterTasks(filteredP);
+
+    return filterI;
   }
 
   return (
@@ -121,11 +162,14 @@ export default function TaskContextProvider({
         deleteTask,
         addTask,
         toogleIsCompleted,
-        filterTasks,
         filteredTasks,
         filterStatus,
         selectedStatus,
         onSetSelectedStatus,
+        selectedPriority,
+        onSelectedPriority,
+        filterInput,
+        onSetFilterInput,
       }}
     >
       {children}

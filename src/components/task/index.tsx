@@ -6,34 +6,21 @@ import { format, startOfDay } from 'date-fns';
 import { cn } from '@/lib/utils';
 import EditTask from '../editTask';
 import { ClipboardList } from 'lucide-react';
-import { Input } from '../ui/input';
-import { Button } from '../ui/button';
-import { useState } from 'react';
+
 import FilterStatus from '../filterStatus';
+import FilterPriority from '../filterPriority';
+import FilterInput from '../filterInput';
 
 export default function Task() {
-  const { tasks, filterTasks, filteredTasks } = useTask();
-  const [filterInput, setFilterInput] = useState('');
+  const { tasks, filteredTasks } = useTask();
 
   const tasksCompleted = tasks.filter((t) => t.isCompleted === true);
-  const existTasks = tasks.length > 0 ? false : true;
-
-  function handleFilterTask(e: string) {
-    setFilterInput(e);
-    filterTasks(e);
-  }
 
   return (
     <div className="mt-8 flex w-[32rem] flex-col items-center space-y-4">
       <div className="flex w-full justify-between gap-1">
-        <Input
-          disabled={existTasks}
-          value={filterInput}
-          placeholder="Filter tasks..."
-          onChange={(event) => handleFilterTask(event.target.value)}
-          className="max-w-xs"
-        />
-        <Button variant={'outline'}>Priority</Button>
+        <FilterInput />
+        <FilterPriority />
         <FilterStatus />
       </div>
 
@@ -56,7 +43,7 @@ export default function Task() {
           <div
             key={task.id}
             className={cn(
-              'flex h-[5.6rem] w-full flex-col justify-between gap-y-2 rounded-sm bg-stone-100 p-4 dark:bg-stone-800',
+              'flex h-[5.6rem] w-full flex-col justify-between gap-y-2 rounded-sm bg-stone-100 p-4 shadow-md dark:bg-stone-800',
               task.dueDate < startOfDay(new Date()) &&
                 'border border-destructive',
             )}
@@ -89,8 +76,8 @@ export default function Task() {
           </div>
         ))
       ) : (
-        <div className="mt-12 flex flex-col items-center gap-1 text-center text-muted-foreground">
-          <ClipboardList size={56} strokeWidth={1.2} />
+        <div className="mt-14 flex flex-col items-center gap-1 pb-7 text-center text-muted-foreground">
+          <ClipboardList size={48} strokeWidth={1} />
           <p>You haven't created any tasks yet</p>
           <p>Create tasks and organize your to-do items</p>
         </div>

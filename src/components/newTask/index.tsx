@@ -92,7 +92,7 @@ export default function NewTask() {
       <DialogTrigger asChild>
         <Button
           variant="default"
-          className="fixed bottom-[4.5rem] right-10 space-x-1 font-semibold"
+          className="fixed bottom-[4.5rem] right-10 space-x-1 font-semibold "
         >
           <PlusCircle size={18} />
           <span>New task</span>

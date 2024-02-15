@@ -9,12 +9,11 @@ import {
   Command,
   CommandEmpty,
   CommandGroup,
-  CommandInput,
   CommandItem,
   CommandList,
   CommandSeparator,
 } from '@/components/ui/command';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import useTask from '@/hooks/useTask';
 import { Filter } from 'lucide-react';
 
