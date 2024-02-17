@@ -48,7 +48,7 @@ export default function FilterPriority() {
         <Button variant="outline">
           <Filter size={14} className="mr-2" />
           Priority
-          {selectedPriority !== null && (
+          {selectedPriority.length > 0 && (
             <>
               <Separator orientation="vertical" className="mx-2 h-4" />
               <Badge

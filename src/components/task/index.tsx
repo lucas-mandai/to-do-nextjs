@@ -1,3 +1,4 @@
+'use client';
 import { Badge } from '../ui/badge';
 import DeleteConfirmation from '../deleteConfirmation';
 import IsCompleted from '../isCompleted';

@@ -1,3 +1,4 @@
+'use client';
 import { TaskContext } from '@/contexts/TaskContext';
 import { useContext } from 'react';
 

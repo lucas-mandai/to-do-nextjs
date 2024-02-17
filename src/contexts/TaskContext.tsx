@@ -1,3 +1,5 @@
+'use client';
+
 import { ITask } from '@/app/page';
 import { Priority } from '@/components/filterPriority';
 import { Status } from '@/components/filterStatus';
