@@ -1,5 +1,5 @@
 # To-Do List 
-## Minha primeira aplicação com Next.js
+## Aplicação com Next.js 14
 
 ![chrome_JtPm5EFCbr](https://github.com/lucas-mandai/to-do-nextjs/assets/122499620/f373947e-b6dd-4492-8f9f-e41a369a03d2)
 
