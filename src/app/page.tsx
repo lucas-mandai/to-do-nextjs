@@ -13,7 +13,7 @@ export interface ITask {
 
 export default function Home() {
   return (
-    <main className="container flex flex-col items-center py-10 ">
+    <main className="container flex flex-col items-center py-10">
       <Greatings />
       <TaskContextProvider>
         <Task />

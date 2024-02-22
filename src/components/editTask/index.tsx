@@ -56,7 +56,7 @@ const FormSchema = z.object({
   description: z
     .string()
     .min(2, { message: 'Name must be at least 2 characters.' })
-    .max(50, { message: 'Name must not be longer than 50 characters.' }),
+    .max(75, { message: 'Name must not be longer than 50 characters.' }),
   priority: z.enum(['high', 'mid', 'low']),
   // isCompleted: z.boolean().default(false),
 });
@@ -81,8 +81,6 @@ export default function EditTask({ task }: EditTaskProp) {
 
   const { formState } = form;
 
-  //   const desc = watch('description');
-  //   console.log(desc);
   const { errors } = formState;
   console.log(errors);
 
@@ -100,7 +98,7 @@ export default function EditTask({ task }: EditTaskProp) {
             <SquarePen size={18} />
           </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="w-[95%] sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>Edit task</DialogTitle>
             <DialogDescription>

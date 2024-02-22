@@ -2,21 +2,12 @@
 @tailwind components;
 @tailwind utilities;
  
-/* body{
-  height: 100%!important;
-  min-height: 100vh!important;
-  display: flex!important;
-  flex-direction: column!important;
+@layer components{
+  .button-position-right-2xl{
+    right: calc(((100vw - 1400px) + 2rem)  / 2 );
+  }
 }
-
-main {
-  flex: 1!important; 
-}
-
-footer{
-  margin-top: auto !important;
-} */
-
+ 
 @layer base {
   :root {
     --background: 0 0% 100%;

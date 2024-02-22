@@ -16,7 +16,7 @@ export default function FilterInput() {
       value={filterInput}
       placeholder="Filter tasks..."
       onChange={(event) => handleFilterTask(event.target.value)}
-      className="max-w-xs"
+      className="w-full md:max-w-xs"
     />
   );
 }

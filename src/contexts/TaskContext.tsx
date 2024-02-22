@@ -10,7 +10,7 @@ interface TaskContextProvideProps {
   children: ReactNode;
 }
 
-interface TaskItem extends ITask {
+export interface TaskItem extends ITask {
   isCompleted: boolean;
 }
 

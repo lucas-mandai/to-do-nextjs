@@ -58,7 +58,7 @@ const FormSchema = z.object({
   description: z
     .string()
     .min(2, { message: 'Name must be at least 2 characters.' })
-    .max(50, { message: 'Name must not be longer than 50 characters.' }),
+    .max(75, { message: 'Name must not be longer than 50 characters.' }),
   priority: z.enum(['high', 'mid', 'low']),
   isCompleted: z.boolean().default(false),
 });
@@ -92,13 +92,13 @@ export default function NewTask() {
       <DialogTrigger asChild>
         <Button
           variant="default"
-          className="fixed bottom-[4.5rem] right-10 space-x-1 font-semibold "
+          className="2xl:button-position-right-2xl fixed bottom-[5rem] right-10 space-x-1 font-semibold md:right-16  "
         >
           <PlusCircle size={18} />
           <span>New task</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="w-[95%] md:max-w-[420px]">
         <DialogHeader>
           <DialogTitle>New task</DialogTitle>
           <DialogDescription>

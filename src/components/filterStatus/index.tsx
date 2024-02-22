@@ -47,7 +47,7 @@ export default function FilterStatus() {
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant="outline" className="w-[150px] justify-start">
+        <Button variant="outline" className="justify-start md:w-[150px]">
           <Filter size={14} className="mr-2" />
           {selectedStatus ? <>{selectedStatus.label}</> : <>Status</>}
         </Button>
